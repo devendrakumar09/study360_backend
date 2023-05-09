@@ -3,7 +3,7 @@ import uuid
 # Create your models here.
 
 class Categories(models.Model):
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     title = models.CharField(max_length=250,null=False)
     created_at = models.DateTimeField(auto_now=True,)
     updated_at = models.DateTimeField(auto_now=True,)
@@ -14,7 +14,7 @@ class Categories(models.Model):
   
 
 class Set(models.Model):
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey("Categories", related_name="category_set", on_delete=models.CASCADE)
     title = models.CharField(max_length=250,null=False)
     description = models.CharField(max_length=50,null=False)
@@ -26,7 +26,7 @@ class Set(models.Model):
         return self.title
 
 class Queston(models.Model):
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     set = models.ForeignKey("Set", related_name="set_question", on_delete=models.CASCADE)
     question = models.CharField(max_length=250,null=False)
     created_at = models.DateTimeField(auto_now=True,)
@@ -37,7 +37,7 @@ class Queston(models.Model):
         return self.question
 
 class Answers(models.Model):
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.ForeignKey("Queston", related_name="question_answer", on_delete=models.CASCADE)
     answer = models.CharField(max_length=250,null=False)
     is_correct = models.BooleanField(default=False)
