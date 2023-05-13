@@ -3,5 +3,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def getCategoriesAPI(request):
-    return HttpResponse("Welcme")
+def index(request):
+    return HttpResponse("Welcome TO INDEX PAGE")

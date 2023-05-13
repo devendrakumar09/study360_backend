@@ -8,6 +8,7 @@ class AnswerAdmin(admin.StackedInline):
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerAdmin]
 
+admin.site.register(MainCategory)
 admin.site.register(Categories)
 admin.site.register(Set)
 admin.site.register(Queston,QuestionAdmin)
