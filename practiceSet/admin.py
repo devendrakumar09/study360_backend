@@ -11,5 +11,5 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.register(MainCategory)
 admin.site.register(Categories)
 admin.site.register(Set)
-admin.site.register(Queston,QuestionAdmin)
+admin.site.register(Questions,QuestionAdmin)
 admin.site.register(Answers)
