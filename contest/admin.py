@@ -17,4 +17,4 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.register(Categories)
 admin.site.register(Contest,ContestAdmin)
 admin.site.register(Questions,QuestionAdmin)
-admin.site.register(Subscribe)
+# admin.site.register(Subscribe)

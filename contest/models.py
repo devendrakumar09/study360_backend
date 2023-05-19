@@ -6,8 +6,7 @@ from django.contrib.auth.models import User
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
     created_at = models.DateTimeField(auto_now=True,)
-    updated_at = models.DateTimeField(auto_now=True,)
-    deleted_at = models.DateTimeField(auto_now=True,)
+    updated_at = models.DateTimeField(auto_now=True,)    
     class Meta:
         abstract = True
 
@@ -15,7 +14,8 @@ class BaseModel(models.Model):
 # Category Model
 class Categories(BaseModel):    
     title = models.CharField(max_length=250,null=False)
-    thumbnail = models.ImageField(null=True)    
+    # thumbnail = models.ImageField(null=True)    
+    thumbnail = models.ImageField(upload_to='static\categories', null= True)
     def __str__(self):
         return self.title   
   
@@ -24,19 +24,18 @@ class Contest(BaseModel):
     category = models.ForeignKey("Categories", related_name="category_contest", on_delete=models.CASCADE)
     title = models.CharField(max_length=250,null=False)
     description = models.CharField(max_length=50,null=False)
-    thumbnail = models.ImageField(null=True)    
+    thumbnail = models.ImageField(upload_to='static\contest', null= True)
     def __str__(self):
         return self.title
     
 
 # CONTEST INFORMATION MODEL
 class ContestInformation(models.Model):    
-    contest = models.OneToOneField("Contest", related_name="contest_information", on_delete=models.CASCADE,primary_key=True,)    
-    
-    firstPrice = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    secondPrice = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    thirdPrice = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    Top50Price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    contest = models.OneToOneField("Contest", related_name="contest_information", on_delete=models.CASCADE,primary_key=True,)        
+    firstPrice = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    secondPrice = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    thirdPrice = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    Top50Price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
     open = models.DateTimeField(auto_now=False, null=True)
     close = models.DateTimeField(auto_now=False,null=True )
@@ -62,9 +61,18 @@ class Answers(models.Model):
     def __str__(self):
         return self.answer
 
-class Subscribe(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    contest = models.ForeignKey("Contest", on_delete=models.CASCADE)
-    Played = models.BooleanField(default=False)
+# class Subscribe(BaseModel):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     contest = models.ForeignKey("Contest", on_delete=models.CASCADE)
+#     Played = models.BooleanField(default=False)
+
+# class SolveQuestion(BaseModel):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     contest = models.ForeignKey("Contest", on_delete=models.CASCADE)
+#     atempt_question = models.ForeignKey(Questions, related_name="solve_questin", on_delete=models.CASCADE)
+#     select_answser = models.ForeignKey(Answers, related_name="solve_answer", on_delete=models.CASCADE)
+#     result = models.BooleanField(default=0)
+
+
     
 
